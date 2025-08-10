@@ -1,0 +1,20 @@
+<div class="container mt-5">
+  <h1 class="mb-4">All Movies</h1>
+  <%= link_to 'New Movie', new_movie_path, class: 'btn btn-primary mb-3' %>
+
+  <div class="row">
+    <% @movies.each do |movie| %>
+      <div class="col-md-4 mb-4">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title"><%= movie.title %></h5>
+            <p class="card-text"><%= truncate(movie.description, length: 100) %></p>
+            <p class="text-muted">Released: <%= movie.release_date.year %></p>
+            <p>Average Rating: <%= movie.ratings.average(:score)&.round(1) || "Not rated" %></p>
+            <%= link_to 'View Details', movie_path(movie), class: 'btn btn-outline-primary' %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
